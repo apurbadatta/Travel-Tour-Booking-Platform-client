@@ -1,22 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors */
+  --color-primary: #0EA5E9;      /* Primary Blue - CTAs, links, active states */
+  --color-secondary: #0D9488;    /* Deep Teal - Secondary buttons, badges */
+  --color-accent: #F97316;       /* Warm Orange - Highlights, ratings, promotions */
+  
+  /* Neutral Colors */
+  --color-neutral: #64748B;      /* Neutral Gray - Text, borders, subtle UI */
+  
+  /* Background & Surface */
+  --background: #F8FAFC;         /* Page background */
+  --surface: #FFFFFF;            /* Cards, modals */
+  
+  /* Text Colors */
+  --color-text-primary: #0F172A; /* Headings */
+  --color-text-secondary: #64748B; /* Body text */
+  
+  /* Status Colors */
+  --color-success: #22C55E;      /* Confirmed, success messages */
+  --color-warning: #EAB308;      /* Pending, warnings */
+  --color-error: #EF4444;        /* Errors, cancellations */
+  
+  --foreground: #0F172A;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  
+  /* Primary palette */
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-neutral: var(--color-neutral);
+  
+  /* Text colors */
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  
+  /* Status colors */
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
