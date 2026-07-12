@@ -30,7 +30,7 @@ export default function Navbar() {
 
   const authLinks = [
     { label: 'My Bookings', href: '/dashboard/bookings', icon: Calendar },
-    ...(isAdmin ? [{ label: 'Add Tour', href: '/admin/tours/create', icon: PlusCircle }] : []),
+    ...(isAdmin ? [{ label: 'Add Tour', href: '/tours/add', icon: PlusCircle }] : []),
     ...(isAdmin ? [{ label: 'Manage Tours', href: '/admin/tours', icon: Settings }] : []),
   ];
 
