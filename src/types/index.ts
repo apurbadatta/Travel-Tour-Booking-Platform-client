@@ -39,6 +39,7 @@ export interface Tour {
   description: string;
   shortDescription: string;
   thumbnail: string;
+  images: string[];
   price: number;
   discountPrice?: number;
   duration: {
@@ -46,6 +47,7 @@ export interface Tour {
     nights: number;
   };
   maxGroupSize: number;
+  difficulty: 'easy' | 'moderate' | 'challenging';
   ratings: {
     average: number;
     count: number;
@@ -54,14 +56,36 @@ export interface Tour {
     _id: string;
     name: string;
     slug: string;
+    image?: string;
+    region?: string;
   };
   category: {
     _id: string;
     name: string;
     slug: string;
+    icon?: string;
   };
+  highlights: string[];
+  included: string[];
+  excluded: string[];
   isFeatured: boolean;
   isActive: boolean;
+}
+
+// Pagination type
+export interface Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
+// Tour API response
+export interface TourListResponse {
+  tours: Tour[];
+  pagination: Pagination;
 }
 
 // Navigation link type
