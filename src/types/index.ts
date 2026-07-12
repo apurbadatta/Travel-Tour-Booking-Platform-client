@@ -45,6 +45,7 @@ export interface Tour {
     days: number;
     nights: number;
   };
+  maxGroupSize: number;
   ratings: {
     average: number;
     count: number;
