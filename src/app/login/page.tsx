@@ -110,7 +110,7 @@ function LoginForm() {
     try {
       await signIn.social({
         provider: 'google',
-        callbackURL: redirectTo,
+        callbackURL: `${window.location.origin}${redirectTo}`,
       });
     } catch (err: any) {
       addToast('Google login failed. Please try again.');

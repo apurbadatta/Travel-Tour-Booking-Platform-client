@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import {
   Loader2,
@@ -463,12 +462,10 @@ function AdminToursContent() {
                         <div className="flex items-center gap-3">
                           <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                             {tour.thumbnail ? (
-                              <Image
+                              <img
                                 src={tour.thumbnail}
                                 alt={tour.title}
-                                fill
-                                className="object-cover"
-                                sizes="48px"
+                                className="w-full h-full object-cover"
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center bg-gray-200">
@@ -603,12 +600,10 @@ function AdminToursContent() {
                 <div className="flex gap-3 mb-3">
                   <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                     {tour.thumbnail ? (
-                      <Image
+                      <img
                         src={tour.thumbnail}
                         alt={tour.title}
-                        fill
-                        className="object-cover"
-                        sizes="48px"
+                        className="w-full h-full object-cover"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-gray-200">
