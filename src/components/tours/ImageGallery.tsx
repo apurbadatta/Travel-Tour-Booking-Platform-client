@@ -24,7 +24,7 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
 
   if (allImages.length === 0) {
     return (
-      <div className="relative h-[300px] md:h-[450px] bg-gray-200 rounded-xl overflow-hidden">
+      <div className="relative h-[300px] md:h-[450px] bg-gray-200 dark:bg-gray-700 rounded-xl overflow-hidden">
         <div className="flex items-center justify-center h-full text-text-secondary">
           No images available
         </div>

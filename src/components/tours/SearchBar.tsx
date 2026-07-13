@@ -45,7 +45,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
         placeholder="Search tours by name or destination..."
         value={localValue}
         onChange={handleChange}
-        className="w-full pl-10 pr-10 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary bg-white text-text-primary placeholder:text-text-secondary"
+        className="w-full pl-10 pr-10 py-3 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary bg-surface dark:bg-[#0F172A] text-text-primary placeholder:text-text-secondary"
       />
       {localValue && (
         <button

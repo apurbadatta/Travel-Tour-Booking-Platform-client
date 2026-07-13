@@ -148,7 +148,7 @@ function ToursContent() {
   return (
     <div className="min-h-screen bg-background">
       {/* Page Header */}
-      <div className="bg-white border-b">
+      <div className="bg-surface dark:bg-[#1E293B] border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
@@ -164,7 +164,7 @@ function ToursContent() {
 
             <button
               onClick={() => setMobileFiltersOpen(true)}
-              className="md:hidden flex items-center space-x-2 px-4 py-2.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              className="md:hidden flex items-center space-x-2 px-4 py-2.5 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
             >
               <SlidersHorizontal className="h-5 w-5 text-text-secondary" />
               <span className="text-sm font-medium text-text-primary">Filters</span>
@@ -190,7 +190,7 @@ function ToursContent() {
         <div className="flex gap-8">
           {/* Desktop Sidebar */}
           <aside className="hidden md:block w-64 flex-shrink-0">
-            <div className="sticky top-24 bg-white rounded-xl p-5 shadow-sm">
+            <div className="sticky top-24 bg-surface dark:bg-[#1E293B] rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700">
               {!categoriesLoading && (
                 <FilterSidebar
                   categories={categories}
@@ -346,7 +346,7 @@ export default function ToursPage() {
     <Suspense
       fallback={
         <div className="min-h-screen bg-background">
-          <div className="bg-white border-b">
+      <div className="bg-surface dark:bg-[#1E293B] border-b border-gray-200 dark:border-gray-700">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
               <h1 className="text-2xl md:text-3xl font-bold text-text-primary">
                 Explore Tours

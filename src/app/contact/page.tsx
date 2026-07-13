@@ -109,7 +109,7 @@ export default function ContactPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-sm p-8">
+            <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-8 border border-gray-100 dark:border-gray-700">
               <h2 className="text-2xl font-semibold text-text-primary mb-6">
                 Send us a Message
               </h2>
@@ -128,7 +128,7 @@ export default function ContactPage() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-600 bg-background dark:bg-[#0F172A] text-text-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                     placeholder="Your full name"
                   />
                   {errors.name && (
@@ -149,7 +149,7 @@ export default function ContactPage() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-600 bg-background dark:bg-[#0F172A] text-text-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                     placeholder="your@email.com"
                   />
                   {errors.email && (
@@ -170,7 +170,7 @@ export default function ContactPage() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-600 bg-background dark:bg-[#0F172A] text-text-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                     placeholder="How can we help you?"
                   />
                 </div>
@@ -188,7 +188,7 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none"
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-600 bg-background dark:bg-[#0F172A] text-text-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none"
                     placeholder="Tell us about your travel plans or questions..."
                   />
                   {errors.message && (
@@ -208,7 +208,7 @@ export default function ContactPage() {
           </div>
 
           <div className="lg:col-span-1 space-y-6">
-            <div className="bg-white rounded-xl shadow-sm p-8">
+            <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-8 border border-gray-100 dark:border-gray-700">
               <h2 className="text-2xl font-semibold text-text-primary mb-6">
                 Company Info
               </h2>
@@ -270,7 +270,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700">
               <div className="h-48 bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 flex items-center justify-center relative">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyem0wLTRWMjhIMjR2Mmgxem0tNC0ydi0yaC0ydjJoMnptLTItMmgtMnYyaDJ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50"></div>
                 <div className="text-center z-10">

@@ -97,7 +97,7 @@ export default function AboutPage() {
         </div>
 
         {/* Our Story */}
-        <div className="bg-white rounded-xl shadow-sm p-8 mb-16">
+        <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-8 mb-16 border border-gray-100 dark:border-gray-700">
           <h2 className="text-2xl font-bold text-text-primary mb-4">Our Story</h2>
           <div className="space-y-4 text-text-secondary leading-relaxed">
             <p>
@@ -149,7 +149,7 @@ export default function AboutPage() {
             {values.map((value) => (
               <div
                 key={value.title}
-                className="bg-white rounded-xl shadow-sm p-6 text-center"
+                className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6 text-center border border-gray-100 dark:border-gray-700"
               >
                 <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <value.icon className="h-6 w-6 text-primary" />
@@ -172,7 +172,7 @@ export default function AboutPage() {
             {team.map((member) => (
               <div
                 key={member.name}
-                className="bg-white rounded-xl shadow-sm p-6"
+                className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6 border border-gray-100 dark:border-gray-700"
               >
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="h-14 w-14 rounded-full bg-primary text-white flex items-center justify-center text-lg font-bold flex-shrink-0">
@@ -192,7 +192,7 @@ export default function AboutPage() {
         </div>
 
         {/* Stats */}
-        <div className="bg-white rounded-xl shadow-sm p-8 mb-16">
+        <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-8 mb-16 border border-gray-100 dark:border-gray-700">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat) => (
               <div key={stat.label}>

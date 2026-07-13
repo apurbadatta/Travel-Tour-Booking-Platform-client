@@ -45,21 +45,21 @@ export default function TourDetailPage() {
       <div className="min-h-screen bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Breadcrumb skeleton */}
-          <div className="h-4 w-48 bg-gray-200 rounded mb-6 animate-pulse" />
+          <div className="h-4 w-48 bg-gray-200 dark:bg-gray-700 rounded mb-6 animate-pulse" />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
               {/* Image skeleton */}
-              <div className="h-[450px] bg-gray-200 rounded-xl animate-pulse" />
+              <div className="h-[450px] bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse" />
               {/* Content skeleton */}
               <div className="space-y-4">
-                <div className="h-8 w-3/4 bg-gray-200 rounded animate-pulse" />
-                <div className="h-4 w-1/2 bg-gray-200 rounded animate-pulse" />
-                <div className="h-32 w-full bg-gray-200 rounded animate-pulse" />
+                <div className="h-8 w-3/4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+                <div className="h-4 w-1/2 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+                <div className="h-32 w-full bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
               </div>
             </div>
             <div className="lg:col-span-1">
-              <div className="h-96 bg-gray-200 rounded-xl animate-pulse" />
+              <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse" />
             </div>
           </div>
         </div>
@@ -141,17 +141,17 @@ export default function TourDetailPage() {
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <button className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                  <button className="p-2 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                     <Share2 className="h-5 w-5 text-text-secondary" />
                   </button>
-                  <button className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                  <button className="p-2 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                     <Heart className="h-5 w-5 text-text-secondary" />
                   </button>
                 </div>
               </div>
 
               {/* Price on mobile */}
-              <div className="mt-4 p-4 bg-white rounded-xl shadow-sm lg:hidden">
+              <div className="mt-4 p-4 bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm lg:hidden border border-gray-100 dark:border-gray-700">
                 <div className="flex items-center space-x-2">
                   {tour.discountPrice && (
                     <span className="text-sm text-text-secondary line-through">
@@ -167,12 +167,12 @@ export default function TourDetailPage() {
             </div>
 
             {/* Tabs / Sections */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6 border border-gray-100 dark:border-gray-700">
               <TourSpecifications tour={tour} />
             </div>
 
             {/* Reviews */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6 border border-gray-100 dark:border-gray-700">
               <ReviewsSection
                 tourId={tourId}
                 averageRating={tour.ratings.average}

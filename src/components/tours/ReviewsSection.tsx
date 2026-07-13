@@ -82,7 +82,7 @@ export default function ReviewsSection({
                   className={`h-5 w-5 ${
                     star <= Math.round(averageRating)
                       ? 'text-accent fill-accent'
-                      : 'text-gray-300'
+                      : 'text-gray-300 dark:text-gray-600'
                   }`}
                 />
               ))}
@@ -97,7 +97,7 @@ export default function ReviewsSection({
             {[5, 4, 3, 2, 1].map((star) => (
               <div key={star} className="flex items-center space-x-2">
                 <span className="text-sm text-text-secondary w-8">{star}★</span>
-                <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-accent rounded-full transition-all"
                     style={{
@@ -120,23 +120,23 @@ export default function ReviewsSection({
               {[1, 2, 3].map((i) => (
                 <div key={i} className="animate-pulse">
                   <div className="flex items-center space-x-3 mb-2">
-                    <div className="w-10 h-10 bg-gray-200 rounded-full" />
-                    <div className="h-4 w-24 bg-gray-200 rounded" />
+                    <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full" />
+                    <div className="h-4 w-24 bg-gray-200 dark:bg-gray-700 rounded" />
                   </div>
-                  <div className="h-4 w-48 bg-gray-200 rounded mb-2" />
-                  <div className="h-16 w-full bg-gray-200 rounded" />
+                  <div className="h-4 w-48 bg-gray-200 dark:bg-gray-700 rounded mb-2" />
+                  <div className="h-16 w-full bg-gray-200 dark:bg-gray-700 rounded" />
                 </div>
               ))}
             </div>
           ) : reviews.length === 0 ? (
             <div className="text-center py-12">
-              <Star className="h-12 w-12 text-gray-300 mx-auto mb-3" />
+              <Star className="h-12 w-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
               <p className="text-text-secondary">No reviews yet. Be the first to review!</p>
             </div>
           ) : (
             <div className="space-y-6">
               {reviews.map((review) => (
-                <div key={review._id} className="border-b border-gray-100 pb-6 last:border-0">
+                <div key={review._id} className="border-b border-gray-100 dark:border-gray-700 pb-6 last:border-0">
                   <div className="flex items-center space-x-3 mb-2">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
                       {review.user?.image ? (

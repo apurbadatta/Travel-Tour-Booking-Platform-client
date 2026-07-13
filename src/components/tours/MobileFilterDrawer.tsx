@@ -53,12 +53,12 @@ export default function MobileFilterDrawer({
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
 
       {/* Drawer */}
-      <div className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-xl overflow-y-auto">
-        <div className="flex items-center justify-between p-4 border-b">
+      <div className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-surface dark:bg-[#1E293B] shadow-xl overflow-y-auto border-l border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
           <h2 className="text-lg font-semibold text-text-primary">Filters</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
           >
             <X className="h-5 w-5 text-text-secondary" />
           </button>
@@ -81,7 +81,7 @@ export default function MobileFilterDrawer({
           />
         </div>
 
-        <div className="p-4 border-t">
+        <div className="p-4 border-t border-gray-200 dark:border-gray-700">
           <button
             onClick={onClose}
             className="w-full py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors"

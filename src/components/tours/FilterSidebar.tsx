@@ -62,7 +62,7 @@ export default function FilterSidebar({
               name="category"
               checked={selectedCategory === ''}
               onChange={() => onCategoryChange('')}
-              className="w-4 h-4 text-primary border-gray-300 focus:ring-primary"
+              className="w-4 h-4 text-primary border-gray-300 dark:border-gray-600 focus:ring-primary"
             />
             <span className="text-sm text-text-secondary">All Categories</span>
           </label>
@@ -73,7 +73,7 @@ export default function FilterSidebar({
                 name="category"
                 checked={selectedCategory === cat._id}
                 onChange={() => onCategoryChange(cat._id)}
-                className="w-4 h-4 text-primary border-gray-300 focus:ring-primary"
+                className="w-4 h-4 text-primary border-gray-300 dark:border-gray-600 focus:ring-primary"
               />
               <span className="text-sm text-text-secondary">{cat.name}</span>
             </label>
@@ -90,7 +90,7 @@ export default function FilterSidebar({
             placeholder="Min"
             value={minPrice}
             onChange={(e) => onMinPriceChange(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-lg text-sm bg-background dark:bg-[#0F172A] text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
             min="0"
           />
           <span className="text-text-secondary">-</span>
@@ -99,7 +99,7 @@ export default function FilterSidebar({
             placeholder="Max"
             value={maxPrice}
             onChange={(e) => onMaxPriceChange(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+            className="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-lg text-sm bg-background dark:bg-[#0F172A] text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
             min="0"
           />
         </div>
@@ -116,7 +116,7 @@ export default function FilterSidebar({
                 name="rating"
                 checked={minRating === option.value}
                 onChange={() => onMinRatingChange(option.value)}
-                className="w-4 h-4 text-primary border-gray-300 focus:ring-primary"
+                className="w-4 h-4 text-primary border-gray-300 dark:border-gray-600 focus:ring-primary"
               />
               {option.value ? (
                 <span className="flex items-center space-x-1 text-sm text-text-secondary">

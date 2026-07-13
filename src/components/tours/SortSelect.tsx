@@ -22,7 +22,7 @@ export default function SortSelect({ value, onChange }: SortSelectProps) {
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none pl-4 pr-10 py-2.5 border border-gray-200 rounded-lg text-sm bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary cursor-pointer"
+        className="appearance-none pl-4 pr-10 py-2.5 border border-gray-200 dark:border-gray-600 rounded-lg text-sm bg-surface dark:bg-[#0F172A] text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary cursor-pointer"
       >
         {sortOptions.map((option) => (
           <option key={option.value} value={option.value}>

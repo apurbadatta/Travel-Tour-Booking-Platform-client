@@ -190,13 +190,13 @@ export default function TourSpecifications({ tour }: TourSpecificationsProps) {
             {itinerary.map((day: any) => (
               <div
                 key={day.day}
-                className="border border-gray-200 rounded-lg overflow-hidden"
+                className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
               >
                 <button
                   onClick={() =>
                     setExpandedDay(expandedDay === day.day ? null : day.day)
                   }
-                  className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
+                  className="w-full flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
                 >
                   <div className="flex items-center space-x-3">
                     <span className="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center font-medium text-sm">
@@ -211,7 +211,7 @@ export default function TourSpecifications({ tour }: TourSpecificationsProps) {
                   />
                 </button>
                 {expandedDay === day.day && (
-                  <div className="px-4 pb-4 border-t">
+                  <div className="px-4 pb-4 border-t border-gray-200 dark:border-gray-700">
                     <p className="text-text-secondary mt-3">{day.description}</p>
                     {day.accommodation && (
                       <p className="text-sm text-text-secondary mt-2">
@@ -240,7 +240,7 @@ export default function TourSpecifications({ tour }: TourSpecificationsProps) {
             {(tour as any).startDates.map((date: string, index: number) => (
               <div
                 key={index}
-                className="flex items-center space-x-2 px-3 py-2 bg-background rounded-lg border border-gray-200"
+                className="flex items-center space-x-2 px-3 py-2 bg-background rounded-lg border border-gray-200 dark:border-gray-700"
               >
                 <Calendar className="h-4 w-4 text-primary" />
                 <span className="text-sm text-text-primary">
