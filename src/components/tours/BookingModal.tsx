@@ -86,13 +86,13 @@ export default function BookingModal({
       <div className="absolute inset-0 bg-black/50" onClick={handleClose} />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-xl shadow-xl w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto">
+      <div className="relative bg-surface dark:bg-[#1E293B] rounded-xl shadow-xl w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-gray-600">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-600">
           <h3 className="text-lg font-semibold text-text-primary">Book This Tour</h3>
           <button
             onClick={handleClose}
-            className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
           >
             <X className="h-5 w-5 text-text-secondary" />
           </button>
@@ -137,7 +137,7 @@ export default function BookingModal({
                   onChange={(e) => setTravelDate(e.target.value)}
                   min={minDate}
                   required
-                  className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                  className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-gray-600 bg-surface dark:bg-[#0F172A] rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-text-primary"
                 />
               </div>
             </div>

@@ -74,7 +74,7 @@ export default function Hero() {
         </p>
 
         {/* Search Box */}
-        <div className="w-full max-w-2xl bg-white rounded-lg p-2 flex items-center shadow-lg">
+        <div className="w-full max-w-2xl bg-surface dark:bg-[#1E293B] rounded-lg p-2 flex items-center shadow-lg border border-gray-200 dark:border-gray-600">
           <div className="flex-1 flex items-center px-4">
             <MapPin className="h-5 w-5 text-text-secondary mr-2" />
             <input

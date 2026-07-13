@@ -96,7 +96,7 @@ export default function Testimonials() {
                   key={testimonial.id}
                   className="w-full md:w-1/3 flex-shrink-0 px-4"
                 >
-                  <div className="bg-white p-6 rounded-xl shadow-md h-full">
+                  <div className="bg-surface dark:bg-[#1E293B] p-6 rounded-xl shadow-md h-full border border-gray-100 dark:border-gray-700">
                     <Quote className="h-8 w-8 text-primary/20 mb-4" />
                     <p className="text-text-secondary mb-6">{testimonial.comment}</p>
                     <div className="flex items-center space-x-4">
@@ -126,13 +126,13 @@ export default function Testimonials() {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 p-2 bg-white rounded-full shadow-md hover:bg-gray-50"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 p-2 bg-surface dark:bg-[#1E293B] rounded-full shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600"
           >
             <ChevronLeft className="h-6 w-6 text-text-primary" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 p-2 bg-white rounded-full shadow-md hover:bg-gray-50"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 p-2 bg-surface dark:bg-[#1E293B] rounded-full shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600"
           >
             <ChevronRight className="h-6 w-6 text-text-primary" />
           </button>

@@ -10,7 +10,7 @@ interface TourCardProps {
 
 export default function TourCard({ tour }: TourCardProps) {
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700">
       {/* Image */}
       <div className="relative h-48">
         <img
@@ -23,7 +23,7 @@ export default function TourCard({ tour }: TourCardProps) {
             {Math.round((1 - tour.discountPrice / tour.price) * 100)}% OFF
           </div>
         )}
-        <button className="absolute top-3 right-3 p-2 bg-white/80 rounded-full hover:bg-white transition-colors">
+        <button className="absolute top-3 right-3 p-2 bg-white/80 dark:bg-gray-800/80 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-colors">
           <Heart className="h-5 w-5 text-text-secondary" />
         </button>
       </div>

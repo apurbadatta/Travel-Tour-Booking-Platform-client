@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import ToastContainer from '@/components/ui/Toast';
+import { ThemeProvider } from '@/lib/theme-context';
 
 const adminRoutes = ['/admin'];
 
@@ -12,11 +13,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route));
 
   return (
-    <>
+    <ThemeProvider>
       {!isAdminRoute && <Navbar />}
       <main className={`flex-1 ${!isAdminRoute ? 'pt-16' : ''}`}>{children}</main>
       {!isAdminRoute && <Footer />}
       <ToastContainer />
-    </>
+    </ThemeProvider>
   );
 }

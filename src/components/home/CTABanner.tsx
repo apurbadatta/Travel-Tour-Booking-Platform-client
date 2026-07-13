@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 
 export default function CTABanner() {
   return (
-    <section className="py-16 px-4 bg-white">
+    <section className="py-16 px-4 bg-surface dark:bg-[#0F172A] transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         <div className="relative bg-gradient-to-r from-accent to-orange-600 rounded-2xl overflow-hidden">
           {/* Background Pattern */}

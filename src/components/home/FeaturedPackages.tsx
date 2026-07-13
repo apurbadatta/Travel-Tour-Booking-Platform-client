@@ -34,7 +34,7 @@ export default function FeaturedPackages() {
   }, []);
 
   return (
-    <section className="py-16 px-4 bg-white">
+    <section className="py-16 px-4 bg-surface dark:bg-[#0F172A] transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">

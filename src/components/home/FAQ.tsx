@@ -58,11 +58,11 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-sm overflow-hidden"
+              className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               >
                 <span className="font-medium text-text-primary pr-4">
                   {faq.question}

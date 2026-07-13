@@ -26,7 +26,7 @@ export default function BookingSidebar({ tour, onBookNow }: BookingSidebarProps)
   const hasDiscount = !!tour.discountPrice;
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 sticky top-24">
+    <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-md p-6 sticky top-24 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
       {/* Price */}
       <div className="mb-6">
         <div className="flex items-center space-x-2 mb-1">
