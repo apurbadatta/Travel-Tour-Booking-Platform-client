@@ -83,10 +83,10 @@ export default function AdminDashboardPage() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {/* Card 1: Users */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center justify-between">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between transition-colors duration-300">
             <div className="space-y-1">
-              <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">Total Registered Users</p>
-              <h3 className="text-3xl font-extrabold text-slate-900">{stats.totalUsers}</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Total Registered Users</p>
+              <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white">{stats.totalUsers}</h3>
               <p className="text-slate-400 text-xs mt-1">Platform-wide accounts</p>
             </div>
             <div className="w-14 h-14 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center border border-teal-100">
@@ -95,10 +95,10 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Card 2: Tours */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center justify-between">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between transition-colors duration-300">
             <div className="space-y-1">
-              <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">Total Tour Packages</p>
-              <h3 className="text-3xl font-extrabold text-slate-900">{stats.totalTours}</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Total Tour Packages</p>
+              <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white">{stats.totalTours}</h3>
               <div className="flex gap-2.5 text-xs text-slate-400 mt-1.5 font-medium">
                 <span className="flex items-center text-emerald-600 gap-0.5"><CheckCircle2 className="w-3.5 h-3.5" />{stats.tourStatusCounts.approved}</span>
                 <span className="flex items-center text-amber-500 gap-0.5"><Clock className="w-3.5 h-3.5" />{stats.tourStatusCounts.pending}</span>
@@ -111,10 +111,10 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Card 3: Revenue */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex items-center justify-between">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between transition-colors duration-300">
             <div className="space-y-1">
-              <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider">Total Earnings / Revenue</p>
-              <h3 className="text-3xl font-extrabold text-slate-900">৳{stats.totalRevenue.toLocaleString()}</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Total Earnings / Revenue</p>
+              <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white">৳{stats.totalRevenue.toLocaleString()}</h3>
               <p className="text-emerald-600 text-xs mt-1 font-medium">From fully verified bookings</p>
             </div>
             <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center border border-emerald-100">
@@ -124,34 +124,34 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Quick Links / Actions */}
-        <h2 className="text-xl font-bold text-slate-900 mb-6">Management Sections</h2>
+        <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Management Sections</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Action 1: Users */}
-          <Link href="/admin/users" className="group bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md hover:border-teal-500/30 transition-all">
-            <div className="w-12 h-12 rounded-xl bg-teal-50 group-hover:bg-teal-600 group-hover:text-white text-teal-600 flex items-center justify-center transition-colors mb-5 border border-teal-100/50">
+          <Link href="/admin/users" className="group bg-surface dark:bg-[#1E293B] rounded-2xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-teal-500/30 transition-all">
+            <div className="w-12 h-12 rounded-xl bg-teal-50 dark:bg-teal-900/30 group-hover:bg-teal-600 group-hover:text-white text-teal-600 dark:text-teal-400 flex items-center justify-center transition-colors mb-5 border border-teal-100 dark:border-teal-800/50">
               <Users className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 group-hover:text-teal-600 transition-colors">Manage Users</h3>
-            <p className="text-slate-500 text-sm mt-1.5">View all user accounts, active roles, and change roles to admin or standard user.</p>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-teal-600 transition-colors">Manage Users</h3>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mt-1.5">View all user accounts, active roles, and change roles to admin or standard user.</p>
           </Link>
 
           {/* Action 2: Bookings */}
-          <Link href="/admin/bookings" className="group bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md hover:border-teal-500/30 transition-all">
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 group-hover:bg-emerald-600 group-hover:text-white text-emerald-600 flex items-center justify-center transition-colors mb-5 border border-emerald-100/50">
+          <Link href="/admin/bookings" className="group bg-surface dark:bg-[#1E293B] rounded-2xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-teal-500/30 transition-all">
+            <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 group-hover:bg-emerald-600 group-hover:text-white text-emerald-600 dark:text-emerald-400 flex items-center justify-center transition-colors mb-5 border border-emerald-100 dark:border-emerald-800/50">
               <DollarSign className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">Manage Bookings & Payments</h3>
-            <p className="text-slate-500 text-sm mt-1.5">Review booking history, transaction IDs, payment details, and total revenue collected.</p>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">Manage Bookings & Payments</h3>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mt-1.5">Review booking history, transaction IDs, payment details, and total revenue collected.</p>
           </Link>
 
           {/* Action 3: Tours */}
-          <Link href="/admin/tours" className="group bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md hover:border-teal-500/30 transition-all">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 group-hover:bg-blue-600 group-hover:text-white text-blue-600 flex items-center justify-center transition-colors mb-5 border border-blue-100/50">
+          <Link href="/admin/tours" className="group bg-surface dark:bg-[#1E293B] rounded-2xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md hover:border-teal-500/30 transition-all">
+            <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 group-hover:bg-blue-600 group-hover:text-white text-blue-600 dark:text-blue-400 flex items-center justify-center transition-colors mb-5 border border-blue-100 dark:border-blue-800/50">
               <Compass className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">Approve & Manage Tours</h3>
-            <p className="text-slate-500 text-sm mt-1.5">Approve pending tour places submitted by users, reject them, or edit existing listings.</p>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">Approve & Manage Tours</h3>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mt-1.5">Approve pending tour places submitted by users, reject them, or edit existing listings.</p>
           </Link>
 
         </div>

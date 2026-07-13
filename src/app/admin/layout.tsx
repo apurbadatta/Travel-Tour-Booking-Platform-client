@@ -8,7 +8,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0F172A] transition-colors duration-300">
       <AdminSidebar />
       <div className="lg:pl-64">
         <main className="p-4 sm:p-6 lg:p-8">{children}</main>

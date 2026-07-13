@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
+import { useTheme } from '@/lib/theme-context';
 import {
   LayoutDashboard,
   Compass,
@@ -14,8 +15,8 @@ import {
   Menu,
   X,
   ChevronRight,
-  Settings,
-  Bell,
+  Sun,
+  Moon,
 } from 'lucide-react';
 
 const sidebarLinks = [
@@ -28,6 +29,7 @@ const sidebarLinks = [
 export default function AdminSidebar() {
   const pathname = usePathname();
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const isActive = (href: string) => {
@@ -74,6 +76,17 @@ export default function AdminSidebar() {
           );
         })}
       </nav>
+
+      {/* Theme Toggle */}
+      <div className="px-4 pb-2">
+        <button
+          onClick={toggleTheme}
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-600 transition-all"
+        >
+          {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+          <span>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
+        </button>
+      </div>
 
       {/* User Info & Logout */}
       <div className="px-4 py-4 border-t border-slate-800">
