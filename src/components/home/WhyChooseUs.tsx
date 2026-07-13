@@ -55,7 +55,7 @@ export default function WhyChooseUs() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="text-center p-6 rounded-xl hover:shadow-lg transition-shadow duration-300"
+              className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300"
             >
               <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
                 <feature.icon className="h-8 w-8 text-primary" />

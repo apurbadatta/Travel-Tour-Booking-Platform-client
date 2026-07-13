@@ -10,7 +10,6 @@ import {
   LogOut,
   ChevronDown,
   MapPin,
-  Calendar,
   PlusCircle,
   Settings,
 } from 'lucide-react';
@@ -29,9 +28,10 @@ export default function Navbar() {
   ];
 
   const authLinks = [
-    { label: 'My Bookings', href: '/dashboard/bookings', icon: Calendar },
-    ...(isAdmin ? [{ label: 'Add Tour', href: '/tours/add', icon: PlusCircle }] : []),
-    ...(isAdmin ? [{ label: 'Manage Tours', href: '/admin/tours', icon: Settings }] : []),
+    { label: 'My Bookings', href: '/dashboard/bookings', icon: PlusCircle },
+    { label: 'Add Tour', href: '/tours/add', icon: PlusCircle },
+    { label: 'Manage Tours', href: '/tours/manage', icon: Settings },
+    ...(isAdmin ? [{ label: 'Admin Panel', href: '/admin', icon: Settings }] : []),
   ];
 
   const handleLogout = async () => {
@@ -88,19 +88,43 @@ export default function Navbar() {
                 {/* Profile Dropdown */}
                 {isProfileDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 border">
+                    {isAdmin ? (
+                      <Link
+                        href="/admin"
+                        className="block px-4 py-2 font-semibold text-primary hover:bg-gray-50"
+                        onClick={() => setIsProfileDropdownOpen(false)}
+                      >
+                        Admin Dashboard
+                      </Link>
+                    ) : (
+                      <Link
+                        href="/dashboard/bookings"
+                        className="block px-4 py-2 font-semibold text-primary hover:bg-gray-50"
+                        onClick={() => setIsProfileDropdownOpen(false)}
+                      >
+                        User Dashboard
+                      </Link>
+                    )}
                     <Link
-                      href="/dashboard"
+                      href="/dashboard/bookings"
                       className="block px-4 py-2 text-text-secondary hover:bg-gray-50"
                       onClick={() => setIsProfileDropdownOpen(false)}
                     >
-                      Dashboard
+                      My Bookings
                     </Link>
                     <Link
-                      href="/dashboard/profile"
+                      href="/tours/manage"
                       className="block px-4 py-2 text-text-secondary hover:bg-gray-50"
                       onClick={() => setIsProfileDropdownOpen(false)}
                     >
-                      Profile Settings
+                      My Tours
+                    </Link>
+                    <Link
+                      href="/tours/add"
+                      className="block px-4 py-2 text-text-secondary hover:bg-gray-50"
+                      onClick={() => setIsProfileDropdownOpen(false)}
+                    >
+                      Add Tour Place
                     </Link>
                     <hr className="my-2" />
                     <button

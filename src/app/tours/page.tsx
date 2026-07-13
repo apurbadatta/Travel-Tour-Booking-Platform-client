@@ -2,7 +2,7 @@
 
 import { Suspense, useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { SlidersHorizontal, SearchX } from 'lucide-react';
+import { SlidersHorizontal, SearchX, AlertCircle } from 'lucide-react';
 import TourCard from '@/components/ui/TourCard';
 import TourCardSkeleton from '@/components/ui/TourCardSkeleton';
 import SearchBar from '@/components/tours/SearchBar';
@@ -52,6 +52,7 @@ function ToursContent() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [categoriesLoading, setCategoriesLoading] = useState(true);
+  const [fetchError, setFetchError] = useState('');
 
   const updateURL = useCallback(() => {
     const params = new URLSearchParams();
@@ -94,6 +95,7 @@ function ToursContent() {
   useEffect(() => {
     const fetchTours = async () => {
       setLoading(true);
+      setFetchError('');
       try {
         const params: Record<string, string> = {
           page: page.toString(),
@@ -113,6 +115,7 @@ function ToursContent() {
         setPagination(data.pagination);
       } catch (error) {
         console.error('Failed to fetch tours:', error);
+        setFetchError('Failed to load tours. Please check your connection and try again.');
         setTours([]);
       } finally {
         setLoading(false);
@@ -264,6 +267,22 @@ function ToursContent() {
                 {Array.from({ length: 12 }).map((_, i) => (
                   <TourCardSkeleton key={i} />
                 ))}
+              </div>
+            ) : fetchError ? (
+              <div className="flex flex-col items-center justify-center py-20">
+                <AlertCircle className="h-16 w-16 text-error/50 mb-4" />
+                <h3 className="text-xl font-semibold text-text-primary mb-2">
+                  Something went wrong
+                </h3>
+                <p className="text-text-secondary mb-6 text-center max-w-md">
+                  {fetchError}
+                </p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 font-medium transition-colors"
+                >
+                  Try Again
+                </button>
               </div>
             ) : tours.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20">

@@ -10,7 +10,7 @@ import { useAuth } from '@/lib/auth-context';
 function RegisterForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { isAuthenticated, addToast } = useAuth();
+  const { isAuthenticated, user, addToast } = useAuth();
 
   const redirectTo = searchParams.get('redirect') || '/';
 
@@ -30,10 +30,18 @@ function RegisterForm() {
   }>({});
 
   useEffect(() => {
-    if (isAuthenticated) {
-      router.push(redirectTo);
+    if (isAuthenticated && user) {
+      if (redirectTo === '/') {
+        if (user.role === 'admin') {
+          router.push('/admin');
+        } else {
+          router.push('/dashboard/bookings');
+        }
+      } else {
+        router.push(redirectTo);
+      }
     }
-  }, [isAuthenticated, router, redirectTo]);
+  }, [isAuthenticated, user, router, redirectTo]);
 
   const getPasswordStrength = (pw: string) => {
     let strength = 0;

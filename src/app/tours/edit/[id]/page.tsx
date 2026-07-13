@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/lib/auth-context';
 import api from '@/lib/api';
+import type { Tour } from '@/types';
 
 interface Category {
   _id: string;
@@ -53,7 +54,9 @@ interface FormErrors {
   [key: string]: string;
 }
 
-export default function AddTourPage() {
+export default function EditTourPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = use(params);
+  const tourId = resolvedParams.id;
   const router = useRouter();
   const { isAuthenticated, isLoading: authLoading, addToast } = useAuth();
 
@@ -80,37 +83,73 @@ export default function AddTourPage() {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
+  const [fetchingTour, setFetchingTour] = useState(true);
   const [categories, setCategories] = useState<Category[]>([]);
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [highlightInput, setHighlightInput] = useState('');
   const [includedInput, setIncludedInput] = useState('');
   const [excludedInput, setExcludedInput] = useState('');
-  const [fetchError, setFetchError] = useState('');
+  const [tourNotFound, setTourNotFound] = useState(false);
 
   // Redirect if not authenticated
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
-      router.push('/login?redirect=/tours/add');
+      router.push(`/login?redirect=/tours/edit/${tourId}`);
     }
-  }, [isAuthenticated, authLoading, router]);
+  }, [isAuthenticated, authLoading, router, tourId]);
 
-  // Fetch categories and destinations
+  // Fetch tour data, categories and destinations
   useEffect(() => {
+    if (!isAuthenticated || authLoading) return;
+
     const fetchData = async () => {
       try {
-        const [catRes, destRes] = await Promise.all([
+        const [tourRes, catRes, destRes] = await Promise.all([
+          api.get(`/api/tours/${tourId}`),
           api.get('/api/tours/categories'),
           api.get('/api/tours/destinations'),
         ]);
+
+        const tour: Tour = tourRes.data.data;
+
+        if (!tour) {
+          setTourNotFound(true);
+          return;
+        }
+
+        setFormData({
+          title: tour.title || '',
+          shortDescription: tour.shortDescription || '',
+          description: tour.description || '',
+          price: tour.price?.toString() || '',
+          discountPrice: tour.discountPrice?.toString() || '',
+          durationDays: tour.duration?.days?.toString() || '',
+          durationNights: tour.duration?.nights?.toString() || '',
+          category: tour.category?._id || '',
+          destination: tour.destination?._id || '',
+          thumbnail: tour.thumbnail || '',
+          maxGroupSize: tour.maxGroupSize?.toString() || '',
+          difficulty: tour.difficulty || 'moderate',
+          departureLocation: tour.departureLocation || '',
+          startPoint: tour.startPoint || '',
+          endPoint: tour.endPoint || '',
+          highlights: tour.highlights || [],
+          included: tour.included || [],
+          excluded: tour.excluded || [],
+        });
+
         setCategories(catRes.data.data);
         setDestinations(destRes.data.data);
       } catch (error) {
-        console.error('Failed to fetch form data:', error);
-        setFetchError('Failed to load categories and destinations. Please refresh the page.');
+        console.error('Failed to fetch data:', error);
+        setTourNotFound(true);
+      } finally {
+        setFetchingTour(false);
       }
     };
+
     fetchData();
-  }, []);
+  }, [tourId, isAuthenticated, authLoading]);
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
@@ -246,19 +285,19 @@ export default function AddTourPage() {
         excluded: formData.excluded,
       };
 
-      await api.post('/api/tours', payload);
+      await api.put(`/api/tours/${tourId}`, payload);
 
-      addToast('Your tour has been submitted and is pending admin approval.', 'success');
+      addToast('Tour updated successfully. Pending admin re-approval.', 'success');
       router.push('/tours/manage');
     } catch (error: any) {
-      const message = error.response?.data?.message || 'Failed to submit tour';
+      const message = error.response?.data?.message || 'Failed to update tour';
       addToast(message);
     } finally {
       setLoading(false);
     }
   };
 
-  if (authLoading) {
+  if (authLoading || fetchingTour) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -270,54 +309,56 @@ export default function AddTourPage() {
     return null;
   }
 
+  if (tourNotFound) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center py-20">
+            <h2 className="text-xl font-semibold text-text-primary mb-2">Tour Not Found</h2>
+            <p className="text-text-secondary mb-6">The tour you're trying to edit doesn't exist.</p>
+            <Link
+              href="/tours/manage"
+              className="px-6 py-2.5 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors"
+            >
+              Go to Manage Tours
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
           <Link
-            href="/tours"
+            href="/tours/manage"
             className="inline-flex items-center space-x-2 text-text-secondary hover:text-primary transition-colors mb-4"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Back to Tours</span>
+            <span>Back to Manage Tours</span>
           </Link>
           <h1 className="text-2xl md:text-3xl font-bold text-text-primary">
-            Submit a New Tour
+            Edit Tour
           </h1>
           <p className="text-text-secondary mt-2">
-            Fill in the details below. Your tour will be reviewed by an admin before going live.
+            Update your tour details. Changes will require admin re-approval before going live.
           </p>
         </div>
 
-        {/* Approval Notice */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-8 flex items-start space-x-3">
-          <Info className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
+        {/* Re-Approval Notice */}
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8 flex items-start space-x-3">
+          <Info className="h-5 w-5 text-amber-500 mt-0.5 flex-shrink-0" />
           <div>
-            <p className="text-sm font-medium text-blue-800">Approval Required</p>
-            <p className="text-sm text-blue-600 mt-1">
-              After submission, your tour will be reviewed by an admin. It will only appear on the site once approved.
+            <p className="text-sm font-medium text-amber-800">Re-Approval Required</p>
+            <p className="text-sm text-amber-600 mt-1">
+              After updating, your tour will be reviewed again by an admin. It will temporarily go offline until re-approved.
               You can track the status from your <Link href="/tours/manage" className="underline font-medium">Manage Tours</Link> page.
             </p>
           </div>
         </div>
-
-        {/* Fetch Error */}
-        {fetchError && (
-          <div className="bg-error/10 border border-error/30 rounded-xl p-4 mb-8 flex items-start space-x-3">
-            <Info className="h-5 w-5 text-error mt-0.5 flex-shrink-0" />
-            <div>
-              <p className="text-sm font-medium text-error">{fetchError}</p>
-              <button
-                type="button"
-                onClick={() => window.location.reload()}
-                className="text-sm text-error underline mt-1 font-medium"
-              >
-                Retry
-              </button>
-            </div>
-          </div>
-        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-8">
@@ -805,7 +846,7 @@ export default function AddTourPage() {
           {/* Submit */}
           <div className="flex items-center justify-end space-x-4">
             <Link
-              href="/tours"
+              href="/tours/manage"
               className="px-6 py-2.5 border border-gray-200 text-text-primary rounded-lg font-medium hover:bg-gray-50 transition-colors"
             >
               Cancel
@@ -818,12 +859,12 @@ export default function AddTourPage() {
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  <span>Submitting...</span>
+                  <span>Updating...</span>
                 </>
               ) : (
                 <>
                   <MapPin className="h-4 w-4" />
-                  <span>Submit for Review</span>
+                  <span>Update Tour</span>
                 </>
               )}
             </button>

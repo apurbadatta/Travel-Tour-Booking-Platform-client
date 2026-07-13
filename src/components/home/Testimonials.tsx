@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 const testimonials = [
@@ -48,7 +48,16 @@ const testimonials = [
 
 export default function Testimonials() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slidesPerView = typeof window !== 'undefined' && window.innerWidth >= 768 ? 3 : 1;
+  const [slidesPerView, setSlidesPerView] = useState(1);
+
+  useEffect(() => {
+    const updateSlidesPerView = () => {
+      setSlidesPerView(window.innerWidth >= 768 ? 3 : 1);
+    };
+    updateSlidesPerView();
+    window.addEventListener('resize', updateSlidesPerView);
+    return () => window.removeEventListener('resize', updateSlidesPerView);
+  }, []);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => 

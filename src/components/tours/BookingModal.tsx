@@ -41,7 +41,7 @@ export default function BookingModal({
     setError('');
 
     try {
-      await api.post('/api/bookings', {
+      const response = await api.post('/api/bookings', {
         tourId,
         travelDate,
         numberOfPeople,
@@ -50,7 +50,13 @@ export default function BookingModal({
         contactPhone,
         specialRequests,
       });
-      setSuccess(true);
+      
+      const { checkoutUrl } = response.data.data;
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else {
+        setSuccess(true);
+      }
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to create booking');
     } finally {

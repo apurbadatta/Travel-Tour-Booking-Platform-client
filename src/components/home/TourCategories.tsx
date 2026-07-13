@@ -74,7 +74,7 @@ export default function TourCategories() {
             <Link
               key={category.id}
               href={`/tours?category=${category.slug}`}
-              className="group p-6 bg-white rounded-xl text-center hover:shadow-lg transition-all duration-300"
+              className="group p-6 bg-white rounded-xl shadow-sm text-center hover:shadow-lg transition-all duration-300"
             >
               <div
                 className={`w-14 h-14 mx-auto mb-3 ${category.color} rounded-full flex items-center justify-center group-hover:scale-110 transition-transform`}

@@ -14,21 +14,21 @@ import {
 const footerLinks = {
   explore: [
     { label: 'All Tours', href: '/tours' },
-    { label: 'Destinations', href: '/destinations' },
+    { label: 'About Us', href: '/about' },
     { label: 'Featured Tours', href: '/tours?featured=true' },
     { label: 'Special Offers', href: '/tours?discount=true' },
   ],
   company: [
     { label: 'About Us', href: '/about' },
     { label: 'Contact', href: '/contact' },
-    { label: 'Careers', href: '/careers' },
-    { label: 'Blog', href: '/blog' },
-  ],
-  support: [
-    { label: 'Help Center', href: '/help' },
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms of Service', href: '/terms' },
-    { label: 'FAQs', href: '/faq' },
+  ],
+  support: [
+    { label: 'Help Center', href: '/contact' },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
+    { label: 'FAQs', href: '/#faq' },
   ],
 };
 

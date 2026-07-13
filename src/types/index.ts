@@ -68,8 +68,18 @@ export interface Tour {
   highlights: string[];
   included: string[];
   excluded: string[];
+  departureLocation: string;
+  startPoint: string;
+  endPoint: string;
   isFeatured: boolean;
   isActive: boolean;
+  status: 'pending' | 'approved' | 'rejected';
+  rejectionReason?: string;
+  reviewedBy?: string;
+  reviewedAt?: string;
+  createdBy: string | { _id: string; name: string; email: string; image?: string };
+  createdAt: string;
+  updatedAt: string;
 }
 
 // Pagination type
