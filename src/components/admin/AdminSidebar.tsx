@@ -17,6 +17,7 @@ import {
   ChevronRight,
   Sun,
   Moon,
+  User,
 } from 'lucide-react';
 
 const sidebarLinks = [
@@ -76,6 +77,22 @@ export default function AdminSidebar() {
           );
         })}
       </nav>
+
+      {/* Profile Link */}
+      <div className="px-4 pb-2">
+        <Link
+          href="/admin/profile"
+          onClick={() => setMobileOpen(false)}
+          className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all group ${
+            isActive('/admin/profile')
+              ? 'bg-teal-500/10 text-teal-400 border border-teal-500/20'
+              : 'text-slate-400 hover:text-white hover:bg-slate-800 border border-transparent'
+          }`}
+        >
+          <User className={`h-5 w-5 flex-shrink-0 ${isActive('/admin/profile') ? 'text-teal-400' : 'text-slate-500 group-hover:text-slate-300'}`} />
+          <span className="flex-1">My Profile</span>
+        </Link>
+      </div>
 
       {/* Theme Toggle */}
       <div className="px-4 pb-2">

@@ -118,6 +118,13 @@ export default function Navbar() {
                       </Link>
                     )}
                     <Link
+                      href="/dashboard/profile"
+                      className="block px-4 py-2 text-text-secondary hover:bg-gray-100 dark:hover:bg-gray-700"
+                      onClick={() => setIsProfileDropdownOpen(false)}
+                    >
+                      My Profile
+                    </Link>
+                    <Link
                       href="/dashboard/bookings"
                       className="block px-4 py-2 text-text-secondary hover:bg-gray-100 dark:hover:bg-gray-700"
                       onClick={() => setIsProfileDropdownOpen(false)}
@@ -204,6 +211,14 @@ export default function Navbar() {
             {isAuthenticated && (
               <>
                 <hr className="my-2 border-gray-200 dark:border-gray-600" />
+                <Link
+                  href="/dashboard/profile"
+                  className="flex items-center space-x-2 py-2 text-text-secondary hover:text-primary"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <User className="h-4 w-4" />
+                  <span>My Profile</span>
+                </Link>
                 {authLinks.map((link) => (
                   <Link
                     key={link.href}
