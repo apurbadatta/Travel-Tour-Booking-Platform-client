@@ -74,7 +74,7 @@ export default function PopularDestinations() {
           {destinations.map((destination) => (
             <Link
               key={destination.id}
-              href={`/destinations/${destination.slug}`}
+              href="/tours"
               className="group relative h-64 rounded-xl overflow-hidden"
             >
               <img
@@ -103,7 +103,7 @@ export default function PopularDestinations() {
         {/* View All Link */}
         <div className="text-center mt-8">
           <Link
-            href="/destinations"
+            href="/tours"
             className="inline-flex items-center space-x-2 text-primary hover:text-primary/80 font-medium"
           >
             <span>View All Destinations</span>
