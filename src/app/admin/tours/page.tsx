@@ -301,25 +301,25 @@ function AdminToursContent() {
 
         {/* Status Counts */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-xl shadow-sm p-4 text-center">
+          <div className="bg-white dark:bg-[#1E293B] rounded-xl shadow-sm p-4 text-center">
             <p className="text-sm text-text-secondary">Pending</p>
             <p className="text-2xl font-bold text-amber-600">
               {statusCounts.pending}
             </p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 text-center">
+          <div className="bg-white dark:bg-[#1E293B] rounded-xl shadow-sm p-4 text-center">
             <p className="text-sm text-text-secondary">Approved</p>
             <p className="text-2xl font-bold text-green-600">
               {statusCounts.approved}
             </p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 text-center">
+          <div className="bg-white dark:bg-[#1E293B] rounded-xl shadow-sm p-4 text-center">
             <p className="text-sm text-text-secondary">Rejected</p>
             <p className="text-2xl font-bold text-red-600">
               {statusCounts.rejected}
             </p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 text-center">
+          <div className="bg-white dark:bg-[#1E293B] rounded-xl shadow-sm p-4 text-center">
             <p className="text-sm text-text-secondary">Total</p>
             <p className="text-2xl font-bold text-primary">
               {statusCounts.all}
@@ -344,7 +344,7 @@ function AdminToursContent() {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                       isActive
                         ? "bg-primary text-white"
-                        : "bg-gray-100 text-text-secondary hover:bg-gray-200"
+                        : "bg-gray-100 dark:bg-gray-700 text-text-secondary hover:bg-gray-200 dark:hover:bg-gray-600"
                     }`}
                   >
                     {tab.charAt(0).toUpperCase() + tab.slice(1)} ({count})
@@ -362,7 +362,7 @@ function AdminToursContent() {
                 placeholder="Search tours..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary w-full sm:w-64"
+                className="pl-9 pr-4 py-2 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary w-full sm:w-64 bg-surface dark:bg-[#0F172A] text-text-primary"
               />
             </div>
             <button
@@ -375,11 +375,11 @@ function AdminToursContent() {
         </div>
 
         {/* Desktop Table */}
-        <div className="hidden lg:block bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="hidden lg:block bg-white dark:bg-[#1E293B] rounded-xl shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-100">
+                <tr className="border-b border-gray-100 dark:border-gray-700">
                   <th className="text-left px-6 py-4 text-sm font-medium text-text-secondary">
                     Tour
                   </th>
@@ -406,36 +406,36 @@ function AdminToursContent() {
               <tbody>
                 {loading ? (
                   Array.from({ length: 5 }).map((_, i) => (
-                    <tr key={i} className="border-b border-gray-50">
+                    <tr key={i} className="border-b border-gray-50 dark:border-gray-700">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-lg bg-gray-200 animate-pulse" />
+                          <div className="w-12 h-12 rounded-lg bg-gray-200 dark:bg-gray-600 animate-pulse" />
                           <div className="space-y-2">
-                            <div className="h-4 bg-gray-200 rounded animate-pulse w-40" />
-                            <div className="h-3 bg-gray-100 rounded animate-pulse w-56" />
+                            <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded animate-pulse w-40" />
+                            <div className="h-3 bg-gray-100 dark:bg-gray-700 rounded animate-pulse w-56" />
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="h-4 bg-gray-200 rounded animate-pulse w-24" />
+                        <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded animate-pulse w-24" />
                       </td>
                       <td className="px-6 py-4">
-                        <div className="h-4 bg-gray-200 rounded animate-pulse w-20" />
+                        <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded animate-pulse w-20" />
                       </td>
                       <td className="px-6 py-4">
-                        <div className="h-4 bg-gray-200 rounded animate-pulse w-16" />
+                        <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded animate-pulse w-16" />
                       </td>
                       <td className="px-6 py-4">
-                        <div className="h-6 bg-gray-200 rounded-full animate-pulse w-20" />
+                        <div className="h-6 bg-gray-200 dark:bg-gray-600 rounded-full animate-pulse w-20" />
                       </td>
                       <td className="px-6 py-4">
-                        <div className="h-4 bg-gray-200 rounded animate-pulse w-20" />
+                        <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded animate-pulse w-20" />
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-end gap-2">
-                          <div className="h-8 bg-gray-200 rounded animate-pulse w-8" />
-                          <div className="h-8 bg-gray-200 rounded animate-pulse w-8" />
-                          <div className="h-8 bg-gray-200 rounded animate-pulse w-8" />
+                          <div className="h-8 bg-gray-200 dark:bg-gray-600 rounded animate-pulse w-8" />
+                          <div className="h-8 bg-gray-200 dark:bg-gray-600 rounded animate-pulse w-8" />
+                          <div className="h-8 bg-gray-200 dark:bg-gray-600 rounded animate-pulse w-8" />
                         </div>
                       </td>
                     </tr>
@@ -443,11 +443,11 @@ function AdminToursContent() {
                 ) : tours.length === 0 ? (
                   <tr>
                     <td colSpan={7} className="px-6 py-16 text-center">
-                      <AlertCircle className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                      <AlertCircle className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
                       <p className="text-text-secondary text-lg">
                         No tours found
                       </p>
-                      <p className="text-gray-400 text-sm mt-1">
+                      <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
                         Try adjusting your filters or search query.
                       </p>
                     </td>
@@ -456,11 +456,11 @@ function AdminToursContent() {
                   tours.map((tour) => (
                     <tr
                       key={tour._id}
-                      className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors"
+                      className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-colors"
                     >
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                          <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700 flex-shrink-0">
                             {tour.thumbnail ? (
                               <img
                                 src={tour.thumbnail}
@@ -468,8 +468,8 @@ function AdminToursContent() {
                                 className="w-full h-full object-cover"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                                <Eye className="w-5 h-5 text-gray-400" />
+                              <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                                <Eye className="w-5 h-5 text-gray-400 dark:text-gray-500" />
                               </div>
                             )}
                           </div>
@@ -536,7 +536,7 @@ function AdminToursContent() {
                           )}
                           <Link
                             href={`/tours/edit/${tour._id}`}
-                            className="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 text-text-secondary rounded-lg text-xs font-medium hover:bg-gray-200 transition-colors"
+                            className="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-text-secondary rounded-lg text-xs font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                             title="Edit"
                           >
                             <Pencil className="w-3.5 h-3.5" />
@@ -546,7 +546,7 @@ function AdminToursContent() {
                             onClick={() =>
                               openDeleteModal(tour._id, tour.title)
                             }
-                            className="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 text-red-600 rounded-lg text-xs font-medium hover:bg-red-50 transition-colors"
+                            className="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-red-600 rounded-lg text-xs font-medium hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                             title="Delete"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -568,26 +568,26 @@ function AdminToursContent() {
             Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="bg-white rounded-xl shadow-sm p-4 animate-pulse"
+                className="bg-white dark:bg-[#1E293B] rounded-xl shadow-sm p-4 animate-pulse"
               >
                 <div className="flex gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-gray-200 flex-shrink-0" />
+                  <div className="w-12 h-12 rounded-lg bg-gray-200 dark:bg-gray-600 flex-shrink-0" />
                   <div className="flex-1 space-y-2">
-                    <div className="h-4 bg-gray-200 rounded w-3/4" />
-                    <div className="h-3 bg-gray-100 rounded w-full" />
+                    <div className="h-4 bg-gray-200 dark:bg-gray-600 rounded w-3/4" />
+                    <div className="h-3 bg-gray-100 dark:bg-gray-700 rounded w-full" />
                     <div className="flex gap-2 mt-2">
-                      <div className="h-5 bg-gray-200 rounded-full w-16" />
-                      <div className="h-5 bg-gray-200 rounded-full w-20" />
+                      <div className="h-5 bg-gray-200 dark:bg-gray-600 rounded-full w-16" />
+                      <div className="h-5 bg-gray-200 dark:bg-gray-600 rounded-full w-20" />
                     </div>
                   </div>
                 </div>
               </div>
             ))
           ) : tours.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-sm p-12 text-center">
-              <AlertCircle className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+            <div className="bg-white dark:bg-[#1E293B] rounded-xl shadow-sm p-12 text-center">
+              <AlertCircle className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
               <p className="text-text-secondary text-lg">No tours found</p>
-              <p className="text-gray-400 text-sm mt-1">
+              <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
                 Try adjusting your filters or search query.
               </p>
             </div>
@@ -595,10 +595,10 @@ function AdminToursContent() {
             tours.map((tour) => (
               <div
                 key={tour._id}
-                className="bg-white rounded-xl shadow-sm p-4"
+                className="bg-white dark:bg-[#1E293B] rounded-xl shadow-sm p-4"
               >
                 <div className="flex gap-3 mb-3">
-                  <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                  <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700 flex-shrink-0">
                     {tour.thumbnail ? (
                       <img
                         src={tour.thumbnail}
@@ -606,8 +606,8 @@ function AdminToursContent() {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                        <Eye className="w-5 h-5 text-gray-400" />
+                      <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                        <Eye className="w-5 h-5 text-gray-400 dark:text-gray-500" />
                       </div>
                     )}
                   </div>
@@ -624,32 +624,32 @@ function AdminToursContent() {
 
                 <div className="grid grid-cols-2 gap-2 text-xs text-text-secondary mb-3">
                   <div>
-                    <span className="text-gray-400">By: </span>
+                    <span className="text-gray-400 dark:text-gray-500">By: </span>
                     <span className="text-text-primary">
                       {getCreatorName(tour.createdBy)}
                     </span>
                   </div>
                   <div>
-                    <span className="text-gray-400">Category: </span>
+                    <span className="text-gray-400 dark:text-gray-500">Category: </span>
                     <span className="text-text-primary">
                       {tour.category?.name || "N/A"}
                     </span>
                   </div>
                   <div>
-                    <span className="text-gray-400">Price: </span>
+                    <span className="text-gray-400 dark:text-gray-500">Price: </span>
                     <span className="text-text-primary font-medium">
                       ৳{tour.price.toLocaleString()}
                     </span>
                   </div>
                   <div>
-                    <span className="text-gray-400">Date: </span>
+                    <span className="text-gray-400 dark:text-gray-500">Date: </span>
                     <span className="text-text-primary">
                       {formatDate(tour.createdAt)}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
+                <div className="flex items-center gap-2 pt-3 border-t border-gray-100 dark:border-gray-700">
                   {tour.status === "pending" && (
                     <button
                       onClick={() => handleApprove(tour._id)}
@@ -676,14 +676,14 @@ function AdminToursContent() {
                   )}
                   <Link
                     href={`/tours/edit/${tour._id}`}
-                    className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 bg-gray-100 text-text-secondary rounded-lg text-xs font-medium hover:bg-gray-200 transition-colors"
+                    className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 text-text-secondary rounded-lg text-xs font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                   >
                     <Pencil className="w-3.5 h-3.5" />
                     Edit
                   </Link>
                   <button
                     onClick={() => openDeleteModal(tour._id, tour.title)}
-                    className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 bg-gray-100 text-red-600 rounded-lg text-xs font-medium hover:bg-red-50 transition-colors"
+                    className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 text-red-600 rounded-lg text-xs font-medium hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                     Delete
@@ -700,7 +700,7 @@ function AdminToursContent() {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage <= 1}
-              className="p-2 rounded-lg bg-white shadow-sm text-text-secondary hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="p-2 rounded-lg bg-white dark:bg-[#1E293B] shadow-sm text-text-secondary hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -734,7 +734,7 @@ function AdminToursContent() {
                     className={`w-10 h-10 rounded-lg text-sm font-medium transition-colors ${
                       currentPage === item
                         ? "bg-primary text-white"
-                        : "bg-white shadow-sm text-text-secondary hover:bg-gray-50"
+                        : "bg-white dark:bg-[#1E293B] shadow-sm text-text-secondary hover:bg-gray-50 dark:hover:bg-gray-800"
                     }`}
                   >
                     {item}
@@ -744,7 +744,7 @@ function AdminToursContent() {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage >= pagination.totalPages}
-              className="p-2 rounded-lg bg-white shadow-sm text-text-secondary hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="p-2 rounded-lg bg-white dark:bg-[#1E293B] shadow-sm text-text-secondary hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -761,12 +761,12 @@ function AdminToursContent() {
           }
         >
           <div
-            className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-xl"
+            className="bg-white dark:bg-[#1E293B] rounded-xl p-6 max-w-md w-full mx-4 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
-                <XCircle className="w-5 h-5 text-red-600" />
+              <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                <XCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-text-primary">
@@ -790,7 +790,7 @@ function AdminToursContent() {
                 onChange={(e) => setRejectReason(e.target.value)}
                 rows={4}
                 placeholder="Provide a reason for rejecting this tour..."
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 resize-none"
+                className="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 resize-none bg-surface dark:bg-[#0F172A] text-text-primary"
               />
               {!rejectReason.trim() && (
                 <p className="text-xs text-red-500 mt-1">
@@ -803,7 +803,7 @@ function AdminToursContent() {
                 onClick={() =>
                   setRejectModal({ open: false, tourId: "", tourTitle: "" })
                 }
-                className="px-4 py-2 bg-gray-100 text-text-secondary rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+                className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-text-secondary rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               >
                 Cancel
               </button>
@@ -829,12 +829,12 @@ function AdminToursContent() {
           }
         >
           <div
-            className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-xl"
+            className="bg-white dark:bg-[#1E293B] rounded-xl p-6 max-w-md w-full mx-4 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
-                <AlertCircle className="w-5 h-5 text-red-600" />
+              <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-text-primary">
@@ -853,7 +853,7 @@ function AdminToursContent() {
                 onClick={() =>
                   setDeleteModal({ open: false, tourId: "", tourTitle: "" })
                 }
-                className="px-4 py-2 bg-gray-100 text-text-secondary rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+                className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-text-secondary rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               >
                 Cancel
               </button>

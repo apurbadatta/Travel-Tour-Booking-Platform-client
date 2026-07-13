@@ -105,39 +105,39 @@ export default function AdminUsersPage() {
     <div>
       <div className="max-w-6xl mx-auto">
         {/* Header and Search */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 dark:bg-[#1E293B]">
           <div>
-            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
               <Users className="h-6 w-6 text-teal-600" />
               Manage Users
             </h1>
-            <p className="text-slate-500 text-sm mt-1">Review accounts, roles, and change access permissions.</p>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Review accounts, roles, and change access permissions.</p>
           </div>
 
           <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-slate-400 dark:text-slate-500" />
             <input
               type="text"
               placeholder="Search by name or email..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 text-sm transition-all"
+              className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 text-sm transition-all bg-surface dark:bg-[#0F172A] text-text-primary"
             />
           </div>
         </div>
 
         {/* Users Table Card */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden dark:bg-[#1E293B]">
           {filteredUsers.length === 0 ? (
-            <div className="p-16 text-center text-slate-500">
-              <p className="font-semibold text-lg text-slate-700">No users found</p>
+            <div className="p-16 text-center text-slate-500 dark:text-slate-400">
+              <p className="font-semibold text-lg text-slate-700 dark:text-slate-200">No users found</p>
               <p className="text-sm mt-1">No user accounts matched your search terms.</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 text-slate-600 text-xs font-bold uppercase tracking-wider">
+                  <tr className="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold uppercase tracking-wider">
                     <th className="px-6 py-4">User</th>
                     <th className="px-6 py-4">Email Address</th>
                     <th className="px-6 py-4">Role</th>
@@ -145,21 +145,21 @@ export default function AdminUsersPage() {
                     <th className="px-6 py-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 text-sm text-slate-700">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-700 text-sm text-slate-700 dark:text-slate-300">
                   {filteredUsers.map((item) => (
-                    <tr key={item._id} className="hover:bg-slate-50/50 transition-colors">
+                    <tr key={item._id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
                       {/* Name & Image */}
                       <td className="px-6 py-4 min-w-[240px]">
                         <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border border-slate-200 flex-shrink-0">
+                          <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center overflow-hidden border border-slate-200 dark:border-slate-600 flex-shrink-0">
                             {item.image ? (
                               <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                             ) : (
-                              <User className="h-5 w-5 text-slate-400" />
+                              <User className="h-5 w-5 text-slate-400 dark:text-slate-500" />
                             )}
                           </div>
                           <div>
-                            <span className="font-bold text-slate-900 block">{item.name}</span>
+                            <span className="font-bold text-slate-900 dark:text-white block">{item.name}</span>
                             {item._id === currentUser?.id && (
                               <span className="text-[10px] bg-teal-50 text-teal-700 font-semibold px-2 py-0.5 rounded border border-teal-200 uppercase tracking-wide w-fit block mt-0.5">
                                 You
@@ -170,7 +170,7 @@ export default function AdminUsersPage() {
                       </td>
 
                       {/* Email */}
-                      <td className="px-6 py-4 font-medium text-slate-600">
+                      <td className="px-6 py-4 font-medium text-slate-600 dark:text-slate-300">
                         {item.email}
                       </td>
 
@@ -182,7 +182,7 @@ export default function AdminUsersPage() {
                             Admin
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 bg-slate-100 text-slate-700 border border-slate-200 px-2.5 py-1 text-xs font-bold rounded-full">
+                          <span className="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 px-2.5 py-1 text-xs font-bold rounded-full">
                             <User className="h-3 w-3" />
                             User
                           </span>
@@ -190,7 +190,7 @@ export default function AdminUsersPage() {
                       </td>
 
                       {/* Created At */}
-                      <td className="px-6 py-4 text-slate-500 font-medium">
+                      <td className="px-6 py-4 text-slate-500 dark:text-slate-400 font-medium">
                         {new Date(item.createdAt).toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: 'short',
@@ -210,9 +210,9 @@ export default function AdminUsersPage() {
                             disabled={item._id === currentUser?.id}
                             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
                               item._id === currentUser?.id
-                                ? 'bg-slate-50 text-slate-400 border-slate-200 cursor-not-allowed'
+                                ? 'bg-slate-50 dark:bg-slate-800 text-slate-400 border-slate-200 dark:border-slate-600 cursor-not-allowed'
                                 : item.role === 'admin'
-                                ? 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
+                                ? 'bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-600 hover:border-slate-300 dark:hover:border-slate-500'
                                 : 'bg-teal-600 hover:bg-teal-700 text-white border-transparent shadow-sm'
                             }`}
                           >
