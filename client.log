@@ -1647,3 +1647,6 @@ https://nextjs.org/docs/messages/module-not-found
  GET / 200 in 203ms (next.js: 145ms, application-code: 58ms)
   Reload env: .env.local
  GET / 200 in 143ms (next.js: 91ms, application-code: 52ms)
+ GET /login 200 in 94ms (next.js: 50ms, application-code: 44ms)
+ GET / 200 in 47ms (next.js: 14ms, application-code: 34ms)
+ GET / 200 in 446ms (next.js: 10ms, application-code: 436ms)
