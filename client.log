@@ -1650,3 +1650,11 @@ https://nextjs.org/docs/messages/module-not-found
  GET /login 200 in 94ms (next.js: 50ms, application-code: 44ms)
  GET / 200 in 47ms (next.js: 14ms, application-code: 34ms)
  GET / 200 in 446ms (next.js: 10ms, application-code: 436ms)
+✓ Compiled in 345ms
+⚠ Fast Refresh had to perform a full reload when ./src/lib/auth-client.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 662ms (next.js: 166ms, application-code: 495ms)
+ GET / 200 in 579ms (next.js: 8ms, application-code: 571ms)
+ GET / 200 in 176ms (next.js: 9ms, application-code: 168ms)
+ GET / 200 in 137ms (next.js: 11ms, application-code: 126ms)
+ GET /login 200 in 472ms (next.js: 295ms, application-code: 177ms)
+✓ Compiled in 861ms
