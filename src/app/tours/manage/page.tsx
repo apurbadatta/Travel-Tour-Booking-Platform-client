@@ -34,7 +34,7 @@ function DeleteModal({ isOpen, tour, onConfirm, onCancel, isDeleting }: DeleteMo
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-xl">
+      <div className="bg-surface dark:bg-[#1E293B] rounded-xl p-6 max-w-md w-full mx-4 shadow-xl border border-gray-100 dark:border-gray-700">
         <div className="flex items-center space-x-3 mb-4">
           <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
             <AlertCircle className="h-5 w-5 text-red-600" />
@@ -223,8 +223,8 @@ export default function ManageToursPage() {
 
         {/* Content */}
         {loading ? (
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-            <div className="bg-gray-50 px-6 py-3">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700">
+            <div className="bg-gray-50 dark:bg-gray-800 px-6 py-3">
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-1 h-4 bg-gray-200 rounded animate-pulse" />
                 <div className="col-span-3 h-4 bg-gray-200 rounded animate-pulse" />
@@ -260,9 +260,9 @@ export default function ManageToursPage() {
             ))}
           </div>
         ) : tours.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700">
             <div className="flex flex-col items-center justify-center py-16 px-6">
-              <div className="h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+              <div className="h-16 w-16 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-4">
                 <MapPin className="h-8 w-8 text-gray-400" />
               </div>
               <h3 className="text-lg font-semibold text-text-primary mb-2">
@@ -283,8 +283,8 @@ export default function ManageToursPage() {
         ) : (
           <>
             {/* Desktop Table */}
-            <div className="hidden md:block bg-white rounded-xl shadow-sm overflow-hidden">
-              <div className="bg-gray-50 px-6 py-3 border-b border-gray-200">
+            <div className="hidden md:block bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 px-6 py-3 border-b border-gray-200 dark:border-gray-700">
                 <div className="grid grid-cols-12 gap-4 text-xs font-medium text-text-secondary uppercase tracking-wider">
                   <div className="col-span-1">Image</div>
                   <div className="col-span-3">Title</div>
@@ -403,7 +403,7 @@ export default function ManageToursPage() {
               {tours.map((tour) => (
                 <div
                   key={tour._id}
-                  className="bg-white rounded-xl shadow-sm overflow-hidden"
+                  className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm overflow-hidden border border-gray-100 dark:border-gray-700"
                 >
                   <div className="p-4">
                     <div className="flex items-start space-x-4">

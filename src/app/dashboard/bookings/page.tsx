@@ -56,15 +56,7 @@ function BookingsListContent() {
   // Handle Stripe Payment Redirect verification
   useEffect(() => {
     if (authLoading) return;
-    if (!isAuthenticated) {
-      router.push('/login?redirect=/dashboard/bookings');
-      return;
-    }
-    if (isAdmin) {
-      router.push('/admin');
-      addToast('Access denied. Admins cannot access user dashboard.', 'error');
-      return;
-    }
+    if (!isAuthenticated) return;
 
     const success = searchParams.get('success');
     const bookingId = searchParams.get('booking_id');
@@ -79,7 +71,6 @@ function BookingsListContent() {
             sessionId,
           });
           addToast('Payment successful! Your booking is now confirmed.', 'success');
-          // Clear query params without reloading
           router.replace('/dashboard/bookings');
         } catch (err: any) {
           console.error('Payment verification failed:', err);
@@ -93,20 +84,20 @@ function BookingsListContent() {
     } else {
       fetchBookings();
     }
-  }, [isAuthenticated, authLoading, isAdmin, searchParams, router, addToast, fetchBookings]);
+  }, [isAuthenticated, authLoading, searchParams, router, addToast, fetchBookings]);
 
   if (authLoading || verifying) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4">
-        <Loader2 className="h-10 w-10 animate-spin text-teal-600" />
-        <p className="text-gray-600 font-medium animate-pulse">
+        <Loader2 className="h-10 w-10 animate-spin text-primary" />
+        <p className="text-text-secondary font-medium animate-pulse">
           {verifying ? 'Verifying your payment securely...' : 'Loading your dashboard...'}
         </p>
       </div>
     );
   }
 
-  if (!isAuthenticated || isAdmin) {
+  if (!isAuthenticated) {
     return null;
   }
 
@@ -141,15 +132,15 @@ function BookingsListContent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Dashboard Header */}
-        <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="bg-surface dark:bg-[#1E293B] rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-700 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-colors">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-              User Dashboard <span className="text-sm font-normal text-slate-500 bg-slate-100 px-3 py-1 rounded-full">Traveler</span>
+            <h1 className="text-2xl md:text-3xl font-bold text-text-primary tracking-tight flex items-center gap-2">
+              My Bookings <span className="text-sm font-normal text-text-secondary bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">Traveler</span>
             </h1>
-            <p className="text-slate-500 mt-1">Manage your bookings, explore places, and track your payment history.</p>
+            <p className="text-text-secondary mt-1">Manage your bookings, explore places, and track your payment history.</p>
           </div>
           <Link
             href="/tours"

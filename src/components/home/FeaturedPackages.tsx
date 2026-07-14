@@ -18,7 +18,7 @@ export default function FeaturedPackages() {
       try {
         setLoading(true);
         const response = await api.get('/api/tours', {
-          params: { limit: 8, sortBy: '-createdAt' },
+          params: { limit: 8, sortBy: '-ratings.average', featured: 'true' },
         });
         const data: TourListResponse = response.data.data;
         setTours(data.tours);

@@ -74,7 +74,7 @@ export default function PopularDestinations() {
           {destinations.map((destination) => (
             <Link
               key={destination.id}
-              href="/tours"
+              href={`/tours?search=${encodeURIComponent(destination.name)}`}
               className="group relative h-64 rounded-xl overflow-hidden"
             >
               <img

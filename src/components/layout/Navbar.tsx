@@ -15,6 +15,8 @@ import {
   Settings,
   Sun,
   Moon,
+  Calendar,
+  Compass,
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -32,8 +34,8 @@ export default function Navbar() {
 
   const authLinks = [
     ...(!isAdmin ? [
-      { label: 'My Bookings', href: '/dashboard/bookings', icon: PlusCircle },
-      { label: 'Manage Tours', href: '/tours/manage', icon: Settings },
+      { label: 'My Bookings', href: '/dashboard/bookings', icon: Calendar },
+      { label: 'Manage Tours', href: '/tours/manage', icon: Compass },
     ] : []),
     { label: 'Add Tour', href: '/tours/add', icon: PlusCircle },
     ...(isAdmin ? [{ label: 'Admin Panel', href: '/admin', icon: Settings }] : []),

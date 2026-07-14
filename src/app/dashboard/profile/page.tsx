@@ -53,10 +53,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (authLoading) return;
-    if (!isAuthenticated) {
-      router.push('/login?redirect=/dashboard/profile');
-      return;
-    }
+    if (!isAuthenticated) return;
     fetchProfile();
   }, [isAuthenticated, authLoading, router]);
 
