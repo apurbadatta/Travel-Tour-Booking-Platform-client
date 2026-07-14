@@ -55,7 +55,8 @@ interface FormErrors {
 
 export default function AddTourPage() {
   const router = useRouter();
-  const { isAuthenticated, isLoading: authLoading, addToast } = useAuth();
+  const { isAuthenticated, isLoading: authLoading, addToast, user } = useAuth();
+  const isAdmin = (user as any)?.role === 'admin';
 
   const [formData, setFormData] = useState<FormData>({
     title: '',
@@ -248,7 +249,12 @@ export default function AddTourPage() {
 
       await api.post('/api/tours', payload);
 
-      addToast('Your tour has been submitted and is pending admin approval.', 'success');
+      addToast(
+        isAdmin
+          ? 'Tour published successfully and is now live!'
+          : 'Your tour has been submitted and is pending admin approval.',
+        'success'
+      );
       router.push('/tours/manage');
     } catch (error: any) {
       const message = error.response?.data?.message || 'Failed to submit tour';
@@ -283,24 +289,28 @@ export default function AddTourPage() {
             <span>Back to Tours</span>
           </Link>
           <h1 className="text-2xl md:text-3xl font-bold text-text-primary">
-            Submit a New Tour
+            {isAdmin ? 'Add a New Tour' : 'Submit a New Tour'}
           </h1>
           <p className="text-text-secondary mt-2">
-            Fill in the details below. Your tour will be reviewed by an admin before going live.
+            {isAdmin
+              ? 'Fill in the details below. The tour will be published live immediately.'
+              : 'Fill in the details below. Your tour will be reviewed by an admin before going live.'}
           </p>
         </div>
 
-        {/* Approval Notice */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-8 flex items-start space-x-3">
-          <Info className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
-          <div>
-            <p className="text-sm font-medium text-blue-800">Approval Required</p>
-            <p className="text-sm text-blue-600 mt-1">
-              After submission, your tour will be reviewed by an admin. It will only appear on the site once approved.
-              You can track the status from your <Link href="/tours/manage" className="underline font-medium">Manage Tours</Link> page.
-            </p>
+        {/* Approval Notice - only for non-admin users */}
+        {!isAdmin && (
+          <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-xl p-4 mb-8 flex items-start space-x-3">
+            <Info className="h-5 w-5 text-blue-500 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Approval Required</p>
+              <p className="text-sm text-blue-600 dark:text-blue-300 mt-1">
+                After submission, your tour will be reviewed by an admin. It will only appear on the site once approved.
+                You can track the status from your <Link href="/tours/manage" className="underline font-medium">Manage Tours</Link> page.
+              </p>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Fetch Error */}
         {fetchError && (
@@ -322,7 +332,7 @@ export default function AddTourPage() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Basic Information */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-semibold text-text-primary mb-4">
               Basic Information
             </h2>
@@ -340,7 +350,7 @@ export default function AddTourPage() {
                   onChange={handleChange}
                   placeholder="e.g. Sundarbans Mangrove Explorer"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.title ? 'border-error' : 'border-gray-200'
+                    errors.title ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.title && <p className="mt-1 text-sm text-error">{errors.title}</p>}
@@ -359,7 +369,7 @@ export default function AddTourPage() {
                   onChange={handleChange}
                   placeholder="Brief summary (max 200 characters)"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.shortDescription ? 'border-error' : 'border-gray-200'
+                    errors.shortDescription ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 <div className="flex justify-between mt-1">
@@ -383,7 +393,7 @@ export default function AddTourPage() {
                   rows={6}
                   placeholder="Detailed description of the tour..."
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none ${
-                    errors.description ? 'border-error' : 'border-gray-200'
+                    errors.description ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.description && <p className="mt-1 text-sm text-error">{errors.description}</p>}
@@ -392,7 +402,7 @@ export default function AddTourPage() {
           </div>
 
           {/* Pricing & Duration */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-semibold text-text-primary mb-4">
               Pricing & Duration
             </h2>
@@ -411,7 +421,7 @@ export default function AddTourPage() {
                   placeholder="0"
                   min="0"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.price ? 'border-error' : 'border-gray-200'
+                    errors.price ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.price && <p className="mt-1 text-sm text-error">{errors.price}</p>}
@@ -431,7 +441,7 @@ export default function AddTourPage() {
                   placeholder="Optional"
                   min="0"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.discountPrice ? 'border-error' : 'border-gray-200'
+                    errors.discountPrice ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.discountPrice && <p className="mt-1 text-sm text-error">{errors.discountPrice}</p>}
@@ -451,7 +461,7 @@ export default function AddTourPage() {
                   placeholder="1"
                   min="1"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.durationDays ? 'border-error' : 'border-gray-200'
+                    errors.durationDays ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.durationDays && <p className="mt-1 text-sm text-error">{errors.durationDays}</p>}
@@ -470,7 +480,7 @@ export default function AddTourPage() {
                   onChange={handleChange}
                   placeholder="0"
                   min="0"
-                  className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                  className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                 />
               </div>
 
@@ -488,7 +498,7 @@ export default function AddTourPage() {
                   placeholder="15"
                   min="1"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.maxGroupSize ? 'border-error' : 'border-gray-200'
+                    errors.maxGroupSize ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.maxGroupSize && <p className="mt-1 text-sm text-error">{errors.maxGroupSize}</p>}
@@ -505,7 +515,7 @@ export default function AddTourPage() {
                     name="difficulty"
                     value={formData.difficulty}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none"
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none"
                   >
                     <option value="easy">Easy</option>
                     <option value="moderate">Moderate</option>
@@ -518,7 +528,7 @@ export default function AddTourPage() {
           </div>
 
           {/* Category & Location */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-semibold text-text-primary mb-4">
               Category & Location
             </h2>
@@ -535,7 +545,7 @@ export default function AddTourPage() {
                     value={formData.category}
                     onChange={handleChange}
                     className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none ${
-                      errors.category ? 'border-error' : 'border-gray-200'
+                      errors.category ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                     }`}
                   >
                     <option value="">Select category</option>
@@ -562,7 +572,7 @@ export default function AddTourPage() {
                     value={formData.destination}
                     onChange={handleChange}
                     className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none ${
-                      errors.destination ? 'border-error' : 'border-gray-200'
+                      errors.destination ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                     }`}
                   >
                     <option value="">Select destination</option>
@@ -590,7 +600,7 @@ export default function AddTourPage() {
                   onChange={handleChange}
                   placeholder="e.g. Dhaka"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.departureLocation ? 'border-error' : 'border-gray-200'
+                    errors.departureLocation ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.departureLocation && <p className="mt-1 text-sm text-error">{errors.departureLocation}</p>}
@@ -609,7 +619,7 @@ export default function AddTourPage() {
                   onChange={handleChange}
                   placeholder="e.g. Tour Operator Office"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.startPoint ? 'border-error' : 'border-gray-200'
+                    errors.startPoint ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.startPoint && <p className="mt-1 text-sm text-error">{errors.startPoint}</p>}
@@ -628,7 +638,7 @@ export default function AddTourPage() {
                   onChange={handleChange}
                   placeholder="e.g. Same as start"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.endPoint ? 'border-error' : 'border-gray-200'
+                    errors.endPoint ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.endPoint && <p className="mt-1 text-sm text-error">{errors.endPoint}</p>}
@@ -647,7 +657,7 @@ export default function AddTourPage() {
                   onChange={handleChange}
                   placeholder="https://example.com/image.jpg"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.thumbnail ? 'border-error' : 'border-gray-200'
+                    errors.thumbnail ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.thumbnail && <p className="mt-1 text-sm text-error">{errors.thumbnail}</p>}
@@ -666,7 +676,7 @@ export default function AddTourPage() {
           </div>
 
           {/* Lists (Highlights, Included, Excluded) */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-semibold text-text-primary mb-4">
               Tour Details
             </h2>
@@ -688,7 +698,7 @@ export default function AddTourPage() {
                       }
                     }}
                     placeholder="Add item"
-                    className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="flex-1 px-3 py-2 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   />
                   <button
                     type="button"
@@ -731,7 +741,7 @@ export default function AddTourPage() {
                       }
                     }}
                     placeholder="Add item"
-                    className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="flex-1 px-3 py-2 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   />
                   <button
                     type="button"
@@ -774,7 +784,7 @@ export default function AddTourPage() {
                       }
                     }}
                     placeholder="Add item"
-                    className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="flex-1 px-3 py-2 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   />
                   <button
                     type="button"
@@ -806,7 +816,7 @@ export default function AddTourPage() {
           <div className="flex items-center justify-end space-x-4">
             <Link
               href="/tours"
-              className="px-6 py-2.5 border border-gray-200 text-text-primary rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              className="px-6 py-2.5 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 text-text-primary rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
             >
               Cancel
             </Link>
@@ -823,7 +833,7 @@ export default function AddTourPage() {
               ) : (
                 <>
                   <MapPin className="h-4 w-4" />
-                  <span>Submit for Review</span>
+                  <span>{isAdmin ? 'Publish Tour' : 'Submit for Review'}</span>
                 </>
               )}
             </button>

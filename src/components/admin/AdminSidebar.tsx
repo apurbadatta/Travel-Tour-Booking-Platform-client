@@ -18,11 +18,13 @@ import {
   Sun,
   Moon,
   User,
+  PlusCircle,
 } from 'lucide-react';
 
 const sidebarLinks = [
   { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { label: 'Tours', href: '/admin/tours', icon: Compass },
+  { label: 'Add Tour', href: '/tours/add', icon: PlusCircle },
   { label: 'Bookings', href: '/admin/bookings', icon: DollarSign },
   { label: 'Users', href: '/admin/users', icon: Users },
 ];

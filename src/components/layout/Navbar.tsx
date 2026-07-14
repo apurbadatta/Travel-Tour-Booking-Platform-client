@@ -31,9 +31,11 @@ export default function Navbar() {
   ];
 
   const authLinks = [
-    { label: 'My Bookings', href: '/dashboard/bookings', icon: PlusCircle },
+    ...(!isAdmin ? [
+      { label: 'My Bookings', href: '/dashboard/bookings', icon: PlusCircle },
+      { label: 'Manage Tours', href: '/tours/manage', icon: Settings },
+    ] : []),
     { label: 'Add Tour', href: '/tours/add', icon: PlusCircle },
-    { label: 'Manage Tours', href: '/tours/manage', icon: Settings },
     ...(isAdmin ? [{ label: 'Admin Panel', href: '/admin', icon: Settings }] : []),
   ];
 
@@ -124,20 +126,24 @@ export default function Navbar() {
                     >
                       My Profile
                     </Link>
-                    <Link
-                      href="/dashboard/bookings"
-                      className="block px-4 py-2 text-text-secondary hover:bg-gray-100 dark:hover:bg-gray-700"
-                      onClick={() => setIsProfileDropdownOpen(false)}
-                    >
-                      My Bookings
-                    </Link>
-                    <Link
-                      href="/tours/manage"
-                      className="block px-4 py-2 text-text-secondary hover:bg-gray-100 dark:hover:bg-gray-700"
-                      onClick={() => setIsProfileDropdownOpen(false)}
-                    >
-                      My Tours
-                    </Link>
+                    {!isAdmin && (
+                      <>
+                        <Link
+                          href="/dashboard/bookings"
+                          className="block px-4 py-2 text-text-secondary hover:bg-gray-100 dark:hover:bg-gray-700"
+                          onClick={() => setIsProfileDropdownOpen(false)}
+                        >
+                          My Bookings
+                        </Link>
+                        <Link
+                          href="/tours/manage"
+                          className="block px-4 py-2 text-text-secondary hover:bg-gray-100 dark:hover:bg-gray-700"
+                          onClick={() => setIsProfileDropdownOpen(false)}
+                        >
+                          My Tours
+                        </Link>
+                      </>
+                    )}
                     <Link
                       href="/tours/add"
                       className="block px-4 py-2 text-text-secondary hover:bg-gray-100 dark:hover:bg-gray-700"

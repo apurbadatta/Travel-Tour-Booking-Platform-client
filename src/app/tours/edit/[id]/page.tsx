@@ -58,7 +58,8 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
   const resolvedParams = use(params);
   const tourId = resolvedParams.id;
   const router = useRouter();
-  const { isAuthenticated, isLoading: authLoading, addToast } = useAuth();
+  const { isAuthenticated, isLoading: authLoading, addToast, user } = useAuth();
+  const isAdmin = (user as any)?.role === 'admin';
 
   const [formData, setFormData] = useState<FormData>({
     title: '',
@@ -287,7 +288,12 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
 
       await api.put(`/api/tours/${tourId}`, payload);
 
-      addToast('Tour updated successfully. Pending admin re-approval.', 'success');
+      addToast(
+        isAdmin
+          ? 'Tour updated successfully and changes are now live!'
+          : 'Tour updated successfully. Pending admin re-approval.',
+        'success'
+      );
       router.push('/tours/manage');
     } catch (error: any) {
       const message = error.response?.data?.message || 'Failed to update tour';
@@ -344,26 +350,30 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
             Edit Tour
           </h1>
           <p className="text-text-secondary mt-2">
-            Update your tour details. Changes will require admin re-approval before going live.
+            {isAdmin
+              ? 'Update your tour details. Changes will be published live immediately.'
+              : 'Update your tour details. Changes will require admin re-approval before going live.'}
           </p>
         </div>
 
-        {/* Re-Approval Notice */}
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-8 flex items-start space-x-3">
-          <Info className="h-5 w-5 text-amber-500 mt-0.5 flex-shrink-0" />
-          <div>
-            <p className="text-sm font-medium text-amber-800">Re-Approval Required</p>
-            <p className="text-sm text-amber-600 mt-1">
-              After updating, your tour will be reviewed again by an admin. It will temporarily go offline until re-approved.
-              You can track the status from your <Link href="/tours/manage" className="underline font-medium">Manage Tours</Link> page.
-            </p>
+        {/* Re-Approval Notice - only for non-admin users */}
+        {!isAdmin && (
+          <div className="bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-xl p-4 mb-8 flex items-start space-x-3">
+            <Info className="h-5 w-5 text-amber-500 dark:text-amber-400 mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="text-sm font-medium text-amber-800 dark:text-amber-200">Re-Approval Required</p>
+              <p className="text-sm text-amber-600 dark:text-amber-300 mt-1">
+                After updating, your tour will be reviewed again by an admin. It will temporarily go offline until re-approved.
+                You can track the status from your <Link href="/tours/manage" className="underline font-medium">Manage Tours</Link> page.
+              </p>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Basic Information */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-semibold text-text-primary mb-4">
               Basic Information
             </h2>
@@ -381,7 +391,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   onChange={handleChange}
                   placeholder="e.g. Sundarbans Mangrove Explorer"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.title ? 'border-error' : 'border-gray-200'
+                    errors.title ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.title && <p className="mt-1 text-sm text-error">{errors.title}</p>}
@@ -400,7 +410,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   onChange={handleChange}
                   placeholder="Brief summary (max 200 characters)"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.shortDescription ? 'border-error' : 'border-gray-200'
+                    errors.shortDescription ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 <div className="flex justify-between mt-1">
@@ -424,7 +434,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   rows={6}
                   placeholder="Detailed description of the tour..."
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none ${
-                    errors.description ? 'border-error' : 'border-gray-200'
+                    errors.description ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.description && <p className="mt-1 text-sm text-error">{errors.description}</p>}
@@ -433,7 +443,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
           </div>
 
           {/* Pricing & Duration */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-semibold text-text-primary mb-4">
               Pricing & Duration
             </h2>
@@ -452,7 +462,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   placeholder="0"
                   min="0"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.price ? 'border-error' : 'border-gray-200'
+                    errors.price ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.price && <p className="mt-1 text-sm text-error">{errors.price}</p>}
@@ -472,7 +482,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   placeholder="Optional"
                   min="0"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.discountPrice ? 'border-error' : 'border-gray-200'
+                    errors.discountPrice ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.discountPrice && <p className="mt-1 text-sm text-error">{errors.discountPrice}</p>}
@@ -492,7 +502,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   placeholder="1"
                   min="1"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.durationDays ? 'border-error' : 'border-gray-200'
+                    errors.durationDays ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.durationDays && <p className="mt-1 text-sm text-error">{errors.durationDays}</p>}
@@ -511,7 +521,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   onChange={handleChange}
                   placeholder="0"
                   min="0"
-                  className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                  className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                 />
               </div>
 
@@ -529,7 +539,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   placeholder="15"
                   min="1"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.maxGroupSize ? 'border-error' : 'border-gray-200'
+                    errors.maxGroupSize ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.maxGroupSize && <p className="mt-1 text-sm text-error">{errors.maxGroupSize}</p>}
@@ -546,7 +556,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                     name="difficulty"
                     value={formData.difficulty}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none"
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none"
                   >
                     <option value="easy">Easy</option>
                     <option value="moderate">Moderate</option>
@@ -559,7 +569,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
           </div>
 
           {/* Category & Location */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-semibold text-text-primary mb-4">
               Category & Location
             </h2>
@@ -576,7 +586,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                     value={formData.category}
                     onChange={handleChange}
                     className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none ${
-                      errors.category ? 'border-error' : 'border-gray-200'
+                      errors.category ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                     }`}
                   >
                     <option value="">Select category</option>
@@ -603,7 +613,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                     value={formData.destination}
                     onChange={handleChange}
                     className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none ${
-                      errors.destination ? 'border-error' : 'border-gray-200'
+                      errors.destination ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                     }`}
                   >
                     <option value="">Select destination</option>
@@ -631,7 +641,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   onChange={handleChange}
                   placeholder="e.g. Dhaka"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.departureLocation ? 'border-error' : 'border-gray-200'
+                    errors.departureLocation ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.departureLocation && <p className="mt-1 text-sm text-error">{errors.departureLocation}</p>}
@@ -650,7 +660,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   onChange={handleChange}
                   placeholder="e.g. Tour Operator Office"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.startPoint ? 'border-error' : 'border-gray-200'
+                    errors.startPoint ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.startPoint && <p className="mt-1 text-sm text-error">{errors.startPoint}</p>}
@@ -669,7 +679,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   onChange={handleChange}
                   placeholder="e.g. Same as start"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.endPoint ? 'border-error' : 'border-gray-200'
+                    errors.endPoint ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.endPoint && <p className="mt-1 text-sm text-error">{errors.endPoint}</p>}
@@ -688,7 +698,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                   onChange={handleChange}
                   placeholder="https://example.com/image.jpg"
                   className={`w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary ${
-                    errors.thumbnail ? 'border-error' : 'border-gray-200'
+                    errors.thumbnail ? 'border-error' : 'border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100'
                   }`}
                 />
                 {errors.thumbnail && <p className="mt-1 text-sm text-error">{errors.thumbnail}</p>}
@@ -707,7 +717,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
           </div>
 
           {/* Lists (Highlights, Included, Excluded) */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-surface dark:bg-[#1E293B] rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-semibold text-text-primary mb-4">
               Tour Details
             </h2>
@@ -729,7 +739,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                       }
                     }}
                     placeholder="Add item"
-                    className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="flex-1 px-3 py-2 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   />
                   <button
                     type="button"
@@ -772,7 +782,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                       }
                     }}
                     placeholder="Add item"
-                    className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="flex-1 px-3 py-2 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   />
                   <button
                     type="button"
@@ -815,7 +825,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
                       }
                     }}
                     placeholder="Add item"
-                    className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="flex-1 px-3 py-2 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   />
                   <button
                     type="button"
@@ -847,7 +857,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
           <div className="flex items-center justify-end space-x-4">
             <Link
               href="/tours/manage"
-              className="px-6 py-2.5 border border-gray-200 text-text-primary rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              className="px-6 py-2.5 border border-gray-200 dark:border-gray-700 dark:bg-[#1E293B] dark:text-gray-100 text-text-primary rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
             >
               Cancel
             </Link>
@@ -864,7 +874,7 @@ export default function EditTourPage({ params }: { params: Promise<{ id: string 
               ) : (
                 <>
                   <MapPin className="h-4 w-4" />
-                  <span>Update Tour</span>
+                  <span>{isAdmin ? 'Update & Publish' : 'Update Tour'}</span>
                 </>
               )}
             </button>
